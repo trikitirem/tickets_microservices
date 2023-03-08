@@ -1,0 +1,42 @@
+version: '3'
+services:
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+    container_name: nginx
+    depends_on:
+      - auth
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    container_name: mongodb
+  rabbitmq:
+    image: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    container_name: rabbitmq
+  auth:
+    image: trikitirem/auth
+    container_name: auth
+    depends_on:
+      - mongo
+      - rabbitmq
+    environment:
+      - MONGO_URI=mongodb://mongo/auth
+      - JWT_KEY=kJPpL5NNOI
+      - EVENT_BUS_URI=amqp://rabbitmq:5672
+  tickets:
+    image: trikitirem/tickets
+    container_name: tickets
+    depends_on:
+      - mongo
+      - rabbitmq
+    environment:
+      - MONGO_URI=mongodb://mongo/tickets
+      - JWT_KEY=kJPpL5NNOI
+      - EVENT_BUS_URI=amqp://rabbitmq:5672
+
+
