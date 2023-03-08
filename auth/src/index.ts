@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { app } from "./app";
 import dotenv from "dotenv";
+import { connectToService } from "@triki/common";
 
 dotenv.config();
 
@@ -19,20 +20,10 @@ const start = async () => {
 
   mongoose.set("strictQuery", true);
 
-  let retries = 5;
-  while (retries) {
-    try {
-      await mongoose.connect(process.env.MONGO_URI);
-      break;
-    } catch (err) {
-      console.log(err);
-      retries -= 1;
-      console.log(`retries left: ${retries}`);
-
-      // wait 5 seconds before another connection attempt
-      await new Promise((res) => setTimeout(res, 5000));
-    }
-  }
+  await connectToService(async () => {
+    await mongoose.connect(process.env.MONGO_URI!);
+    console.log("Connected to DB");
+  });
 
   const port = 4000;
   app.listen(port, () => {
