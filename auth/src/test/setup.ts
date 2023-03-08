@@ -1,5 +1,11 @@
 import { MongoMemoryServer } from "mongodb-memory-server";
-import mongoose from "mongoose";
+import mongoose, { Types } from "mongoose";
+import { JsonWebToken } from "@triki/common";
+
+const id = new Types.ObjectId().toHexString();
+jest
+  .spyOn(JsonWebToken, "verify")
+  .mockImplementation((_) => ({ id, email: "test@email.com" }));
 
 let mongo: any;
 

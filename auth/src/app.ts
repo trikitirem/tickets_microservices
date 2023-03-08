@@ -1,11 +1,6 @@
 import express from "express";
-import {
-  currentUserRouter,
-  signInRouter,
-  signOutRouter,
-  signUpRouter,
-} from "./routes";
-import { errorHandler } from "@triki/common";
+import { router } from "./routes";
+import { currentUser, errorHandler } from "@triki/common";
 import cors from "cors";
 
 import cookieParser from "cookie-parser";
@@ -18,10 +13,9 @@ app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(currentUserRouter);
-app.use(signInRouter);
-app.use(signOutRouter);
-app.use(signUpRouter);
+app.use(currentUser);
+
+app.use(router);
 
 app.use(errorHandler);
 
