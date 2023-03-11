@@ -28,7 +28,7 @@ export const request = async <T, U extends object>(
     credentials: "include",
   });
 
-  if (response.status >= 400) {
+  if (!response.ok) {
     return handleErrors(response);
   }
 

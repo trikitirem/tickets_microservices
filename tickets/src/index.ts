@@ -28,13 +28,13 @@ const start = async () => {
     });
 
     const eventbus = EventBus.getInstance();
-    await connectToService(async () => {
-      await eventbus.connect(onMessage);
-      console.log("Connected to RabbitMQ");
-    });
+    // await connectToService(async () => {
+    //   await eventbus.connect(onMessage);
+    //   console.log("Connected to RabbitMQ");
+    // });
 
     app.listen(4000, () => {
-      console.log("Listening on port 3000");
+      console.log("Listening on port 4000");
     });
   } catch (err) {
     console.log(err);

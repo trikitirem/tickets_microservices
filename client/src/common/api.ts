@@ -3,3 +3,8 @@ export enum UsersApiPaths {
   SignIn = "/users/signin",
   CurrentUser = "/users/currentuser",
 }
+
+export enum TicketsApiPaths {
+  TicketsIndex = "/tickets/tickets",
+  TicketsIndexWithId = "/tickets/tickets/:id",
+}

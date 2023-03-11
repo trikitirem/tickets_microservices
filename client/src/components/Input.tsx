@@ -1,13 +1,15 @@
 import { ChangeEventHandler } from "react";
 
+type InputType =
+  | { value: string; type: "text" | "password" }
+  | { value: number; type: "number" };
+
 type Props = {
   name: string;
-  value: string;
   placeholder?: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
-  type?: React.HTMLInputTypeAttribute;
   error?: string;
-};
+} & InputType;
 
 export const Input = ({
   name,

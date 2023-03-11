@@ -1,4 +1,4 @@
 export enum Routes {
-  INDEX = "/",
-  INDEX_WITH_ID = "/:id",
+  INDEX = "/tickets",
+  INDEX_WITH_ID = "/tickets/:id",
 }

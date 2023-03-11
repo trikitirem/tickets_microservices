@@ -1,17 +1,16 @@
 import { Navbar } from "../../components";
-import { Tickets } from "./Tickets";
+import { TicketList } from "./components/TicketList";
 
 export const Home = () => {
   return (
     <>
-      <Navbar />
       <header className="my-8">
         <p className="text-4xl">
           Welcome to the Tickets (briliant name isn't it?)
         </p>
       </header>
       <main>
-        <Tickets />
+        <TicketList />
       </main>
     </>
   );

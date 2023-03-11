@@ -1,11 +1,10 @@
 import { RouterProvider } from "react-router-dom";
 import { router } from "./screens";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClientProvider } from "react-query";
 import { UserContext } from "./context";
 import { useState } from "react";
 import { User } from "./models/User";
-
-const queryClient = new QueryClient();
+import { queryClient } from "./common";
 
 export const App = () => {
   const [user, setUser] = useState<User | null>(null);

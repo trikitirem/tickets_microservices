@@ -59,6 +59,7 @@ export const Signin = () => {
           className="flex flex-col gap-2 items-start"
         >
           <Input
+            type="text"
             name={Fields.EMAIL}
             value={values.email}
             onChange={handleChange}
@@ -66,11 +67,11 @@ export const Signin = () => {
             error={errors.email}
           />
           <Input
+            type="password"
             name={Fields.PASSWORD}
             value={values.password}
             onChange={handleChange}
             placeholder="password"
-            type="password"
             error={errors.password}
           />
           <button disabled={isLoading} type="submit">
