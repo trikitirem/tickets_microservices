@@ -1,7 +1,7 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import { errorHandler } from "@triki/common";
-import { getOrdersRouter, createOrderRouter } from "./routes";
+import { router } from "./routes";
 import { currentUser } from "@triki/common";
 
 const app = express();
@@ -12,8 +12,7 @@ app.use(cookieParser());
 
 app.use(currentUser);
 
-app.use(getOrdersRouter);
-app.use(createOrderRouter);
+app.use(router);
 
 app.use(errorHandler);
 

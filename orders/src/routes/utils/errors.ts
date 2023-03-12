@@ -1,0 +1,4 @@
+export enum OrdersErrors {
+  AMOUNT_INVALID = "AMOUNT_INVALID",
+  TICKET_ID_INVALID = "TICKET_ID_INVALID",
+}

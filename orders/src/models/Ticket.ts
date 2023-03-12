@@ -11,14 +11,14 @@ const ticketSchema = new Schema<Ticket>(
       type: Number,
       required: true,
     },
+    id: {
+      type: String,
+      required: true,
+    },
   },
   {
-    _id: false,
     toJSON: {
       transform(_, ret) {
-        delete ret.password;
-
-        ret.id = ret._id;
         delete ret._id;
       },
       versionKey: false,

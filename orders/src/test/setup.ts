@@ -2,11 +2,10 @@ import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose, { Types } from "mongoose";
 import { JsonWebToken } from "@triki/common";
 
-export const mockedUserId = new Types.ObjectId().toHexString();
-jest.spyOn(JsonWebToken, "verify").mockReturnValue({
-  id: mockedUserId,
-  email: "test@test.com",
-});
+const id = new Types.ObjectId().toHexString();
+jest
+  .spyOn(JsonWebToken, "verify")
+  .mockImplementation((_) => ({ id, email: "test@email.com" }));
 
 let mongo: any;
 
@@ -35,13 +34,3 @@ afterAll(async () => {
 
   await mongoose.connection.close();
 });
-
-declare global {
-  var cookie: () => string[];
-}
-
-global.cookie = () => {
-  const mockedCookie = `token=token`;
-
-  return [mockedCookie];
-};

@@ -3,6 +3,15 @@ import { app } from "../../app";
 import { Routes } from "../utils";
 import { Types } from "mongoose";
 import { Order } from "../../models";
+import { Ticket } from "../../models/Ticket";
+
+const ticketId = new Types.ObjectId();
+const ticketPrice = 20;
+
+const createTicket = async () => {
+  const ticket = new Ticket({ id: ticketId, price: ticketPrice });
+  await ticket.save();
+};
 
 describe("create order route", () => {
   it("should throw 401 when user is not authenticated", async () => {
@@ -20,7 +29,7 @@ describe("create order route", () => {
 
     const response = await request(app)
       .post(Routes.INDEX)
-      .set("Cookie", cookie())
+      .set("Authorization", "Bearer token")
       .send({ ticketId, amount: -13 });
 
     expect(response.statusCode).toEqual(400);
@@ -31,22 +40,23 @@ describe("create order route", () => {
 
     const response = await request(app)
       .post(Routes.INDEX)
-      .set("Cookie", cookie())
+      .set("Authorization", "Bearer token")
       .send({ ticketId, amount: -13 });
 
     expect(response.statusCode).toEqual(400);
   });
 
   it("should create succesfully create new order", async () => {
+    await createTicket();
+
     let orders = await Order.find({});
     expect(orders.length).toBe(0);
 
     const amount = 2;
-    const ticketId = new Types.ObjectId();
 
     const response = await request(app)
       .post(Routes.INDEX)
-      .set("Cookie", cookie())
+      .set("Authorization", "Bearer token")
       .send({ ticketId, amount });
 
     const { statusCode, body } = response;

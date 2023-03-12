@@ -30,14 +30,11 @@ const orderSchema = new Schema<Order>(
     },
     due: {
       type: Number,
-      required: true,
     },
   },
   {
     toJSON: {
       transform(_, ret) {
-        delete ret.password;
-
         ret.id = ret._id;
         delete ret._id;
       },
@@ -47,7 +44,9 @@ const orderSchema = new Schema<Order>(
 );
 
 orderSchema.pre("save", async function (next) {
-  const ticket = await Ticket.findById<Ticket>(this.ticketId);
+  const ticket = await Ticket.findOne<Ticket>({ id: this.ticketId });
+
+  console.log(ticket);
 
   if (!ticket || !ticket.price) {
     throw new NotFoundError();
