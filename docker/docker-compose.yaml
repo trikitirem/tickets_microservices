@@ -39,5 +39,14 @@ services:
       - MONGO_URI=mongodb://mongo/tickets
       - JWT_KEY=kJPpL5NNOI
       - EVENT_BUS_URI=amqp://rabbitmq:5672
-
+  orders:
+    image: trikitirem/orders
+    container_name: orders
+    depends_on:
+      - mongo
+      - rabbitmq
+    environment:
+      - MONGO_URI=mongodb://mongo/orders
+      - JWT_KEY=kJPpL5NNOI
+      - EVENT_BUS_URI=amqp://rabbitmq:5672
 

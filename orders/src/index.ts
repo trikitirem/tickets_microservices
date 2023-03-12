@@ -1,8 +1,7 @@
 import mongoose from "mongoose";
 import { app } from "./app";
-import { EventBus } from "@triki/common";
+import { EventBus, connectToService } from "@triki/common";
 import { onMessage } from "./events";
-import { TestEvent } from "./events/event";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -22,15 +21,19 @@ const start = async () => {
     }
 
     mongoose.set("strictQuery", true);
-    await mongoose.connect(process.env.MONGO_URI);
+    await connectToService(async () => {
+      await mongoose.connect(process.env.MONGO_URI!);
+      console.log("Connected to DB");
+    });
 
     const eventBus = EventBus.getInstance();
-    await eventBus.connect(onMessage);
+    await connectToService(async () => {
+      await eventBus.connect(onMessage);
+      console.log("Connected to RabbitMQ");
+    });
 
-    eventBus.sendEvent(new TestEvent({ message: "eoeoeoeeo" }));
-
-    app.listen(3000, () => {
-      console.log("Listening on port 3000");
+    app.listen(4000, () => {
+      console.log("Listening on port 4000");
     });
   } catch (err) {
     console.log(err);
