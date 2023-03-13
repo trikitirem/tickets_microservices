@@ -24,7 +24,7 @@ export const TicketList = () => {
       <section>
         <h1 className="text-2xl mb-2">Tickets</h1>
         {tickets.length > 0 ? (
-          <div className="grid grid-cols-3">
+          <div className="grid gap-4 grid-cols-3">
             {tickets.map((ticket) => (
               <TicketCard key={ticket.id} ticket={ticket} />
             ))}

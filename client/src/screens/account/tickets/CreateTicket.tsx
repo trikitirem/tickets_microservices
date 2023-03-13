@@ -13,34 +13,38 @@ import { useState } from "react";
 
 export const CreateTicket = () => {
   const [globalErrors, setGlobalErrors] = useState<string[]>([]);
-  const { values, handleChange, handleSubmit, errors, setErrors } = useFormik({
-    onSubmit: (values) =>
-      mutate(values, {
-        onSuccess: () => {
-          setErrors({});
-          setGlobalErrors([]);
+  const { values, handleChange, handleSubmit, errors, setErrors, resetForm } =
+    useFormik({
+      onSubmit: (values) =>
+        mutate(values, {
+          onSuccess: () => {
+            setErrors({});
+            setGlobalErrors([]);
 
-          queryClient.invalidateQueries([
-            QueryKeys.GET_TICKETS,
-            QueryKeys.GET_MY_TICKETS,
-          ]);
-        },
-        onError: (err) => {
-          if (err instanceof ApiValidationError) {
-            setErrors(err.reduceErrors());
-            return;
-          }
+            resetForm();
+            alert("Ticket created");
 
-          if (err instanceof ApiError) {
-            setGlobalErrors(err.mapErrors());
-            return;
-          }
+            queryClient.invalidateQueries([
+              QueryKeys.GET_TICKETS,
+              QueryKeys.GET_MY_TICKETS,
+            ]);
+          },
+          onError: (err) => {
+            if (err instanceof ApiValidationError) {
+              setErrors(err.reduceErrors());
+              return;
+            }
 
-          setGlobalErrors(["COULD_NOT_CREATE_TICKET"]);
-        },
-      }),
-    initialValues,
-  });
+            if (err instanceof ApiError) {
+              setGlobalErrors(err.mapErrors());
+              return;
+            }
+
+            setGlobalErrors(["COULD_NOT_CREATE_TICKET"]);
+          },
+        }),
+      initialValues,
+    });
 
   const { mutate } = useMutation(
     (values: TicketBody): Promise<Ticket> =>

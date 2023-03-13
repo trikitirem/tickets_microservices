@@ -15,4 +15,8 @@ export class ApiValidationError extends Error {
       }))
       .reduce((prev, curr) => ({ ...prev, ...curr }), {});
   }
+
+  mapErorrsToArray() {
+    return this.errors.map((err) => err.message);
+  }
 }

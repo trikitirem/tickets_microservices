@@ -7,4 +7,5 @@ export const QueryKeys = {
   GET_TICKETS: "GET_TICKETS",
   GET_MY_TICKETS: "GET_MY_TICKETS",
   GET_TICKET: (id: string) => ["GET_TICKET", id],
+  GET_ORDERS: "GET_ORDERS",
 };
