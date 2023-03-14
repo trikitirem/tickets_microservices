@@ -6,6 +6,7 @@ import { Routes } from "../routes";
 import { CreateTicket } from "./tickets";
 import { QueryKeys, queryClient } from "../../common";
 import { Orders } from "./orders";
+import { GetMyTickets } from "./tickets/GetMyTickets";
 
 export const Account = () => {
   const { user, setUser } = useContext(UserContext);
@@ -36,8 +37,9 @@ export const Account = () => {
           </div>
           <button onClick={handleSignOut}>Sing out</button>
         </div>
-        <CreateTicket />
         <Orders />
+        <CreateTicket />
+        <GetMyTickets />
       </div>
     );
   }

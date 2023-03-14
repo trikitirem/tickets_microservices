@@ -4,14 +4,10 @@ import { TicketsResponse } from "./dto";
 import { TicketCard } from "./TicketCard";
 
 export const TicketList = () => {
-  const { data, isLoading, error } = useQuery(
+  const { data, error } = useQuery(
     QueryKeys.GET_TICKETS,
     (): Promise<TicketsResponse> => request(TicketsApiPaths.TicketsIndex)
   );
-
-  if (isLoading) {
-    return <span>Loading tickets....</span>;
-  }
 
   if (error) {
     return <span className="text-red-500">COULD_NOT_LOAD_TICKETS</span>;

@@ -1,3 +1,5 @@
+import { Ticket } from "../../../models";
+
 export type Order = {
   id: string;
   ticketId: string;
@@ -8,3 +10,5 @@ export type Order = {
 };
 
 export type OrderResponse = { orders: Order[] };
+
+export type MyTicektsResponse = { tickets: Ticket[] };
