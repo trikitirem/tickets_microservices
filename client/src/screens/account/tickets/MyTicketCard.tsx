@@ -14,7 +14,7 @@ export const MyTicketCard = ({ ticket }: Props) => {
   const [globalErrors, setErrors] = useState<string[]>([]);
   const { mutate } = useMutation(
     () =>
-      request(TicketsApiPaths.TicketsIndexWithId.replace(":id", id), "put", {
+      request(TicketsApiPaths.IndexWithId.replace(":id", id), "put", {
         price,
         title,
       }),

@@ -1,5 +1,5 @@
 export enum Routes {
-  INDEX = "/tickets",
-  INDEX_WITH_ID = "/tickets/:id",
-  MINE = "/tickets/mine",
+  INDEX = "/",
+  INDEX_WITH_ID = "/:id",
+  MINE = "/mine",
 }

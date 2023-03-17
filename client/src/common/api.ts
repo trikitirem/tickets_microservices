@@ -5,11 +5,11 @@ export enum UsersApiPaths {
 }
 
 export enum TicketsApiPaths {
-  TicketsIndex = "/tickets/tickets",
-  TicketsIndexWithId = "/tickets/tickets/:id",
-  Mine = "/tickets/tickets/mine",
+  Index = "/tickets",
+  IndexWithId = "/tickets/:id",
+  Mine = "/tickets/mine",
 }
 
 export enum OrdersApiPaths {
-  OrdersIndex = "/orders/orders",
+  Index = "/orders",
 }

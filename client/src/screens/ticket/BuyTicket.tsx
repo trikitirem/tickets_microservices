@@ -12,7 +12,7 @@ export const BuyTicket = ({ ticketId }: Props) => {
   const [amount, setAmount] = useState(1);
   const [errors, setErrors] = useState<string[]>([]);
   const { mutate, isLoading } = useMutation(
-    () => request(OrdersApiPaths.OrdersIndex, "post", { ticketId, amount }),
+    () => request(OrdersApiPaths.Index, "post", { ticketId, amount }),
     {
       onSuccess: (_) => {
         alert("Ticket has been bought!");

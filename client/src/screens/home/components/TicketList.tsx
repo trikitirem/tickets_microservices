@@ -6,7 +6,7 @@ import { TicketCard } from "./TicketCard";
 export const TicketList = () => {
   const { data, error } = useQuery(
     QueryKeys.GET_TICKETS,
-    (): Promise<TicketsResponse> => request(TicketsApiPaths.TicketsIndex)
+    (): Promise<TicketsResponse> => request(TicketsApiPaths.Index)
   );
 
   if (error) {

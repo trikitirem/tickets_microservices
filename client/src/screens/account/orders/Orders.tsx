@@ -6,7 +6,7 @@ import { OrderCard } from "./OrderCard";
 export const Orders = () => {
   const { data, error } = useQuery(
     QueryKeys.GET_ORDERS,
-    (): Promise<OrderResponse> => request(OrdersApiPaths.OrdersIndex)
+    (): Promise<OrderResponse> => request(OrdersApiPaths.Index)
   );
 
   if (error) {

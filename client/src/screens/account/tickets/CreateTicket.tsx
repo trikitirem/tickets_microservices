@@ -48,7 +48,7 @@ export const CreateTicket = () => {
 
   const { mutate } = useMutation(
     (values: TicketBody): Promise<Ticket> =>
-      request(TicketsApiPaths.TicketsIndex, "post", values)
+      request(TicketsApiPaths.Index, "post", values)
   );
 
   return (

@@ -18,7 +18,7 @@ export const TicketComponent = ({ id }: { id: string }) => {
   const { data } = useQuery(
     QueryKeys.GET_TICKET(id),
     (): Promise<TicketModel> =>
-      request(TicketsApiPaths.TicketsIndexWithId.replace(":id", id))
+      request(TicketsApiPaths.IndexWithId.replace(":id", id))
   );
 
   if (data) {

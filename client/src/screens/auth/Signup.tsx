@@ -59,6 +59,7 @@ export const Signup = () => {
           className="flex flex-col gap-2 items-start"
         >
           <Input
+            type="text"
             name={Fields.EMAIL}
             value={values.email}
             onChange={handleChange}
