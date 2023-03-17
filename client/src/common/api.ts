@@ -7,7 +7,7 @@ export enum UsersApiPaths {
 export enum TicketsApiPaths {
   Index = "/tickets",
   IndexWithId = "/tickets/:id",
-  Mine = "/tickets/mine",
+  All = "/tickets/all",
 }
 
 export enum OrdersApiPaths {

@@ -46,8 +46,6 @@ const orderSchema = new Schema<Order>(
 orderSchema.pre("save", async function (next) {
   const ticket = await Ticket.findOne<Ticket>({ id: this.ticketId });
 
-  console.log(ticket);
-
   if (!ticket || !ticket.price) {
     throw new NotFoundError();
   }

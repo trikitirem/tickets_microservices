@@ -17,7 +17,6 @@ export const createOrder = async (
     const { id, createdAt } = order;
     res.status(201).send({ ...body, createdAt, id });
   } catch (err) {
-    console.log(err);
     next(err);
   }
 };

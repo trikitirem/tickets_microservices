@@ -10,7 +10,7 @@ describe("update ticket", () => {
     const id = new Types.ObjectId().toHexString();
 
     const { body, statusCode } = await request(app)
-      .put(`/tickets/${id}`)
+      .put(`/${id}`)
       .set("Authorization", "Bearer token")
       .send(ticket);
 
@@ -21,9 +21,7 @@ describe("update ticket", () => {
   it("returns 401 when user is unauthenticated", async () => {
     const id = new Types.ObjectId().toHexString();
 
-    const { body, statusCode } = await request(app)
-      .put(`/tickets/${id}`)
-      .send(ticket);
+    const { body, statusCode } = await request(app).put(`/${id}`).send(ticket);
 
     expect(statusCode).toEqual(401);
     expect(body).toEqual({ errors: [{ message: "UNAUTHORIZED" }] });
@@ -31,7 +29,7 @@ describe("update ticket", () => {
 
   it("returns 403 when user is not owner of the ticket", async () => {
     const createdTicket = await request(app)
-      .post("/tickets")
+      .post("/")
       .set("Authorization", "Bearer token")
       .send(ticket)
       .expect(201);
@@ -43,7 +41,7 @@ describe("update ticket", () => {
     });
 
     const { body, statusCode } = await request(app)
-      .put(`/tickets/${createdTicket.body.id}`)
+      .put(`/${createdTicket.body.id}`)
       .send(ticket)
       .set("Authorization", "Bearer token");
 
@@ -53,13 +51,13 @@ describe("update ticket", () => {
 
   it("returns 400 when title or price are wrong", async () => {
     const createdTicket = await request(app)
-      .post("/tickets")
+      .post("/")
       .set("Authorization", "Bearer token")
       .send(ticket)
       .expect(201);
 
     const { statusCode, body } = await request(app)
-      .put(`/tickets/${createdTicket.body.id}`)
+      .put(`/${createdTicket.body.id}`)
       .send({ title: "", price: -1 })
       .set("Authorization", "Bearer token");
 
@@ -75,13 +73,13 @@ describe("update ticket", () => {
 
   it("allows to update the ticket", async () => {
     const createdTicket = await request(app)
-      .post("/tickets")
+      .post("/")
       .set("Authorization", "Bearer token")
       .send(ticket)
       .expect(201);
 
     const { body, statusCode } = await request(app)
-      .put(`/tickets/${createdTicket.body.id}`)
+      .put(`/${createdTicket.body.id}`)
       .send({ title: "Bring Me The Horizon", price: 22 })
       .set("Authorization", "Bearer token");
 

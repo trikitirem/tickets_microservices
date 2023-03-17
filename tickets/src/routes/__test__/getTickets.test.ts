@@ -3,7 +3,7 @@ import { app } from "../../app";
 
 const createTicket = () =>
   request(app)
-    .post("/tickets")
+    .post("/")
     .set("Authorization", "Bearer token")
     .send({ title: "random title", price: 20 })
     .expect(201);
@@ -14,7 +14,7 @@ describe("get all tickets", () => {
     await createTicket();
     await createTicket();
 
-    const { body, statusCode } = await request(app).get("/tickets").send();
+    const { body, statusCode } = await request(app).get("/all").send();
 
     expect(statusCode).toEqual(200);
     expect(body.tickets).toHaveLength(3);

@@ -6,7 +6,7 @@ import { MyTicketCard } from "./MyTicketCard";
 export const GetMyTickets = () => {
   const { data } = useQuery(
     QueryKeys.GET_MY_TICKETS,
-    (): Promise<MyTicektsResponse> => request(TicketsApiPaths.Mine)
+    (): Promise<MyTicektsResponse> => request(TicketsApiPaths.Index)
   );
 
   if (data) {

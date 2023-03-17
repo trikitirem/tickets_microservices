@@ -24,7 +24,7 @@ export const Orders = () => {
         </div>
       </div>
     ) : (
-      <p>You have no ticket yet</p>
+      <p className="py-2">You have no orders yet!</p>
     );
   }
 
