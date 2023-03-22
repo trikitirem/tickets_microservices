@@ -3,6 +3,7 @@ import { app } from "./app";
 import { EventBus, connectToService } from "@triki/common";
 import { onMessage } from "./events";
 import dotenv from "dotenv";
+import amqp from "amqplib";
 
 dotenv.config();
 
@@ -28,8 +29,7 @@ const start = async () => {
 
     const eventBus = EventBus.getInstance();
     await connectToService(async () => {
-      await eventBus.connect(onMessage);
-      console.log("Connected to RabbitMQ");
+      await eventBus.connect((message) => onMessage(message));
     });
 
     app.listen(4000, () => {

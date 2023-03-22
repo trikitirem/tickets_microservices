@@ -14,6 +14,7 @@ const ticketSchema = new Schema<Ticket>(
     id: {
       type: String,
       required: true,
+      unique: true,
     },
   },
   {

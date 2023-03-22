@@ -6,10 +6,6 @@ import { connectToService } from "@triki/common";
 dotenv.config();
 
 const start = async () => {
-  if (!process.env.EVENT_BUS_URI) {
-    throw new Error("JWT_KEY must be defined");
-  }
-
   if (!process.env.JWT_KEY) {
     throw new Error("JWT_KEY must be defined");
   }

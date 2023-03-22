@@ -29,8 +29,7 @@ const start = async () => {
 
     const eventbus = EventBus.getInstance();
     await connectToService(async () => {
-      await eventbus.connect(onMessage);
-      console.log("Connected to RabbitMQ");
+      await eventbus.connect();
     });
 
     app.listen(4000, () => {
